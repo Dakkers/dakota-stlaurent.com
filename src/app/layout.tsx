@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
 
 const notoSansFont = Noto_Sans({ subsets: ["latin"] });
 
@@ -17,6 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={notoSansFont.className}>
+        <Navbar />
+
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
           <div className="max-w-5xl w-full">{children}</div>
         </main>
