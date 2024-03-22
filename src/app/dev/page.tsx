@@ -2,7 +2,7 @@ import Image from "next/image";
 import pigsImg from "./pigs.jpg";
 import Link from "next/link";
 
-export default function About() {
+export default function DevPortfolio() {
   return (
     <>
       <h1 className="text-7xl font-semibold mb-4">Dev Portfolio</h1>

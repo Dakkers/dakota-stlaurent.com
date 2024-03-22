@@ -1,6 +1,6 @@
 import Image from "next/image";
 import pigsImg from "./pigs.jpg";
-import Link from "next/link";
+import { Link } from "@/components/Link";
 
 export default function About() {
   return (
@@ -9,9 +9,9 @@ export default function About() {
       <div className="flex flex-col text-lg gap-4">
         <p>
           I&lsquo;m currently a senior software developer on{" "}
-          <a className="underline" href="https://www.applyboard.com/">
+          <Link href="https://www.applyboard.com/">
             ApplyBoard
-          </a>
+          </Link>
           &lsquo;s UI Engineering team. My team&lsquo;s primary role is
           maintaining ApplyBoard&lsquo;s design system, <b>Crystal</b>, enabling
           other developers to create accessible, responsive, and intuitive
@@ -20,17 +20,16 @@ export default function About() {
 
         <p>
           I am also currently enrolled in the{" "}
-          <a
-            className="underline"
+          <Link
             href="https://www.fanshawec.ca/programs/oni1-oneida-language-immersion-culture-and-teaching/next#"
           >
             Oneida language program
-          </a>{" "}
+          </Link>{" "}
           at Fanshawe College. Oneida is a critically endangered language and I
           am working to help revitalize through the creation of{" "}
-          <a className="underline" href="https://learn-oneida.com/">
+          <Link href="https://learn-oneida.com/">
             learn-oneida.com
-          </a>
+          </Link>
           , which is how I spend a good chunk of my time. I hope to eventually
           expand it to include the other Haudenosaunee languages (Mohawk,
           Cayuga, Tuscarora, Seneca, and Onondaga). I myself am mixed
@@ -56,12 +55,12 @@ export default function About() {
         <p>
           The last thing I&lsquo;ll put here is that I have a couple of
           miniature pigs, all of which are rescues. Check out their{" "}
-          <a
-            className="underline"
+          <Link
+
             href="https://www.instagram.com/pigs_of_scotland/"
           >
             dedicated Instagram page
-          </a>
+          </Link>
           !
         </p>
       </div>
