@@ -1,30 +1,33 @@
 import Image from "next/image";
 import meImg from "./me.jpg";
-import Link from "next/link";
 import React from "react";
+import { Link } from "@/components/Link";
+import { PageTitle } from "@/components/PageTitle";
 
 export default function Home() {
   return (
     <>
-      <h1 className="text-7xl font-semibold mb-4">Dakota St. Laurent</h1>
-      <div className="mb-8 text-2xl">
-        Senior Software Developer | Composer, Producer | Language Activist
+      <PageTitle>Dakota St. Laurent</PageTitle>
+      <div className="flex flex-col mb-8 text-lg md:text-xl mt-4 sm:flex-row sm:gap-1 sm:justify-center md:justify-start">
+        <span>Senior Software Developer</span>
+        <span className="hidden sm:block">|</span>
+        <span>Composer, Producer</span>
+        <span className="hidden sm:block">|</span>
+        <span>Language Activist</span>
       </div>
-      <div className="flex justify-between gap-16">
+      <div className="flex justify-between gap-8 md:gap-16 flex-col-reverse sm:flex-row">
         <p className="text-lg">
           She:kon / Shekólih! My name is Dakota and this is my website. Click{" "}
-          <Link className="underline" href="/about">
-            here
-          </Link>{" "}
-          to learn more about me. TL;DR: I&lsquo;m knowledgeable about web
-          development and making music 🤓 I am a language activist 🐢 and I have
-          a couple of miniature pig rescues. 🐷
+          <Link href="/about">here</Link> to learn more about me. TL;DR:
+          I&lsquo;m knowledgeable about web development and making music 🤓 I am
+          a language activist 🐢 and I have a couple of miniature pig rescues.
+          🐷
         </p>
 
-        <div>
+        <div className="mx-auto md:mx-0">
           <Image
             alt=""
-            className="rounded-full max-w-none h-[300px] w-[300px]"
+            className="rounded-full max-w-none h-[175px] w-[175px] md:h-[300px] md:w-[300px]"
             src={meImg}
           />
         </div>
