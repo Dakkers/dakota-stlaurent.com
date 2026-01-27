@@ -1,12 +1,4 @@
-import React from "react";
 import { Link } from "@/components/Link";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { PageTitle } from "@/components/PageTitle";
 
 export default function Tools() {
@@ -19,7 +11,7 @@ export default function Tools() {
   ];
 
   return (
-    <>
+    <div>
       <PageTitle>Tools</PageTitle>
       <p className="mb-4">
         Sometimes I build things that I find useful, and you know what they
@@ -30,7 +22,7 @@ export default function Tools() {
           <ToolCard {...tool} key={i} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -44,14 +36,14 @@ function ToolCard({
   title: string;
 }) {
   return (
-    <Card className="w-100 sm:w-[350px]">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{desc}</CardDescription>
-      </CardHeader>
-      <CardFooter className="flex justify-end">
+    <article className="w-100 sm:w-[350px] p-4 rounded-lg border border-slate-200 bg-white text-slate-950 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50">
+      <header className="flex flex-col space-y-1.5 mb-4">
+        <h2 className="font-bold">{title}</h2>
+      </header>
+      <p>{desc}</p>
+      <footer className="flex justify-end mt-4">
         <Link href={`/tools/${href}`}>Try it</Link>
-      </CardFooter>
-    </Card>
+      </footer>
+    </article>
   );
 }

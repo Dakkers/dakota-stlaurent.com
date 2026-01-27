@@ -18,14 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={notoSansFont.className}>
-        <main className="flex min-h-screen flex-col items-center px-4 xl:px-24">
-          <div className="max-w-5xl w-full">
-            <Navbar />
+        <main className="min-h-screen flex flex-col max-w-5xl mx-auto gap-4 pb-8">
+          <Navbar />
 
-            <div className="mt-4 xl:mt-24">
-              <div className="flex-grow">{children}</div>
-            </div>
-          </div>
+          <div className="flex flex-grow">{children}</div>
         </main>
       </body>
     </html>

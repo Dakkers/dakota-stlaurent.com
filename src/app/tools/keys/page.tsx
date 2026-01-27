@@ -1,23 +1,8 @@
 "use client";
 import { PageTitle } from "@/components/PageTitle";
-import { Button } from "@/components/ui/button";
 import React from "react";
 
-type KEY =
-  | "C"
-  | "C#/Db"
-  | "D"
-  | "D#/Eb"
-  | "E"
-  | "F"
-  | "F#/Gb"
-  | "G"
-  | "G#/Ab"
-  | "A"
-  | "A#/Bb"
-  | "B";
-
-const ALL_KEYS: KEY[] = [
+const ALL_KEYS = [
   "C",
   "C#/Db",
   "D",
@@ -30,7 +15,9 @@ const ALL_KEYS: KEY[] = [
   "A",
   "A#/Bb",
   "B",
-];
+] as const;
+
+type KEY = (typeof ALL_KEYS)[number];
 
 export default function ToolsKeys() {
   return (
@@ -67,8 +54,9 @@ function TheStuff() {
   );
   const [keysPlayed, setKeysPlayed] = React.useState<KEY[]>([]);
   const [hasMidiAccess, setHasMidiAccess] = React.useState(false);
-  const [midiAccessObj, setMidiAccessObj] =
-    React.useState<WebMidi.MIDIAccess | null>(null);
+  const [midiAccessObj, setMidiAccessObj] = React.useState<MIDIAccess | null>(
+    null,
+  );
 
   const goNext = React.useCallback(() => {
     const numRemainingKeys = keysRemaining.length;
@@ -101,7 +89,11 @@ function TheStuff() {
   );
 
   const getMidiMessage = React.useCallback(
-    (message: WebMidi.MIDIMessageEvent) => {
+    (message: MIDIMessageEvent) => {
+      if (!message.data) {
+        return;
+      }
+
       const command = message.data[0];
       const note = message.data[1];
       const velocity = message.data.length > 2 ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
@@ -152,8 +144,14 @@ function TheStuff() {
   return (
     <>
       <div className="flex gap-4  ">
-        <Button onClick={goNext}>{!hasStarted ? "Start" : "Next"}</Button>
-        {hasStarted && <Button onClick={restart}>Restart</Button>}
+        <button className="cursor-pointer bg-slate-300 p-3" onClick={goNext}>
+          {!hasStarted ? "Start" : "Next"}
+        </button>
+        {hasStarted && (
+          <button className="cursor-pointer bg-slate-300 p-3" onClick={restart}>
+            Restart
+          </button>
+        )}
       </div>
 
       <p className="text-5xl">{letterText}</p>
