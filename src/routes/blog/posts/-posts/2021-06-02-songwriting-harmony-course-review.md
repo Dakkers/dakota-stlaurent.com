@@ -1,5 +1,5 @@
 ---
-title: "Course Review of “Berklee Online - Songwriting: Harmony“"
+title: "Review of Berklee Online's _Songwriting: Harmony_"
 date: 2021-06-02 22:16:00
 categories: school, music, songwriting
 ---

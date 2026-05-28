@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
+import { PageTitle } from "../../components/PageTitle";
 
 export const Route = createFileRoute("/tools/keys")({
   component: RouteComponent,
@@ -9,9 +10,7 @@ function RouteComponent() {
   return (
     <main className="page-wrap px-4 py-12">
       <section className="island-shell rounded-2xl p-6 sm:p-8">
-        <h1 className="display-title mb-3 text-4xl font-bold text-[var(--sea-ink)] sm:text-5xl">
-          Musical Keys
-        </h1>
+        <PageTitle className="mb-3">Musical Keys</PageTitle>
 
         <TheStuff />
       </section>
@@ -169,9 +168,9 @@ function speak(key: KEY) {
     const [, keyFlat] = key.split("/");
     contentToSpeak = keyFlat.replace("b", " flat");
   }
-//   if (contentToSpeak.startsWith("A")) {
-//     contentToSpeak = contentToSpeak.replace("A", "Eh");
-//   }
+  //   if (contentToSpeak.startsWith("A")) {
+  //     contentToSpeak = contentToSpeak.replace("A", "Eh");
+  //   }
 
   if (!!window.speechSynthesis && !!window.speechSynthesis.speak) {
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(contentToSpeak));

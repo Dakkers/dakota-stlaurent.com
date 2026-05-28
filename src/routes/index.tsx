@@ -12,9 +12,8 @@ function Home() {
           <div className="mb-3 text-xl font-bold">
             UX/UI Developer | Producer, Composer, Songwriter
           </div>
-          <p className="m-0 max-w-3xl text-lg leading-8 text-[var(--sea-ink-soft)]">
-            Howdy! My name is Dakota and this is my website. Click <Link to="/about">here</Link> to
-            learn more about me.
+          <p className="m-0 max-w-3xl text-lg leading-8 text-[var(--primary-400)]">
+            Howdy! My name's Dakota. Click <Link to="/about">here</Link> to learn more about me.
           </p>
         </div>
 

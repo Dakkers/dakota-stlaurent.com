@@ -1,5 +1,5 @@
 ---
-title: "Course Review of “Berklee Online - Arranging: Contemporary Styles”"
+title: "Review of Berklee Online's _Arranging: Contemporary Styles_"
 date: 2020-11-15 12:32:00
 categories: school, music, arranging
 ---
@@ -60,7 +60,7 @@ Sometimes other students will comment on your discussion answer but that was rar
 For each style there’s a list of characteristics that are given. Here’s an example:
 
 > **Basic Instrumentation**
-> Basic instrumentation includes drums, fingered electric bass, piano, Hammond B-3 organ, Wurlitzer electric piano or Fender Rhodes, two electric guitars, background vocals, horns, and lead vocals.\_
+> Basic instrumentation includes drums, fingered electric bass, piano, Hammond B-3 organ, Wurlitzer electric piano or Fender Rhodes, two electric guitars, background vocals, horns, and lead vocals.
 >
 > Depending on whether the music is more traditional or commercial, the instrumentation varies.
 >

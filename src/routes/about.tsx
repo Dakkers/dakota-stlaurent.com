@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageTitle } from "../components/PageTitle";
 
 export const Route = createFileRoute("/about")({ component: About });
 
@@ -6,9 +7,7 @@ function About() {
   return (
     <main className="page-wrap px-4 py-12">
       <section className="island-shell rounded-2xl p-6 sm:p-8">
-        <h1 className="display-title mb-3 text-4xl font-bold text-[var(--sea-ink)] sm:text-5xl">
-          About me
-        </h1>
+        <PageTitle className="mb-3">About me</PageTitle>
 
         <div className="flex flex-col text-lg gap-4 mt-4">
           <p>
@@ -33,13 +32,13 @@ function About() {
             responsible for managing much of the frontend CI tooling as well!
           </p>
 
-          <hr />
+          {/* <hr />
 
           <p>
             While I'm putting this section second, music is my true passion. There is something so
             deeply fulfilling about making something your own that invokes a specific feeling. You
             can check out my works <Link to="/music">here</Link>!
-          </p>
+          </p> */}
 
           <hr />
 

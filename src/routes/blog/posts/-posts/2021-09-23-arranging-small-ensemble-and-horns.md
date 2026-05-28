@@ -1,5 +1,5 @@
 ---
-title: "Course Review of “Berklee Online - Arranging: Small Ensemble and Horns“"
+title: "Review of Berklee Online's _Arranging: Small Ensemble and Horns_"
 date: 2021-09-23 18:20:00
 categories: school, music, arranging
 ---
