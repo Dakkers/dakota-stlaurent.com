@@ -28,14 +28,14 @@ function Blog() {
                 </Link>
               </h2>
               <div className="flex">
-                <p className="text-sm text-[var(--primary-400)]">
+                <div className="text-sm text-[var(--primary-400)]">
                   {post.date.toLocaleDateString("en-CA", { dateStyle: "long" })}
-                </p>
+                </div>
               </div>
               {post.excerpt && (
-                <p className="mt-2 text-sm text-[var(--primary-400)]">
+                <div className="mt-2 text-sm text-[var(--primary-400)]">
                   <Markdown>{`${post.excerpt}...`}</Markdown>
-                </p>
+                </div>
               )}
               <CategoryChips categories={post.categories} className="mt-3" />
             </li>
