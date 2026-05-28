@@ -3,7 +3,7 @@ import { allPosts } from "./-posts/summary";
 import Markdown from "react-markdown";
 import { PageTitle } from "@/components/PageTitle";
 import { CategoryChips } from "@/routes/blog/-components/CategoryChips";
-import { Link } from "#/components/Link";
+import { ExternalLink } from "#/components/Link";
 
 export const Route = createFileRoute("/blog/posts/$postSlug")({
   loader: ({ params }) => {
@@ -31,7 +31,7 @@ function RouteComponent() {
         <div className="mt-4 flex flex-col gap-3">
           <Markdown
             components={{
-              a: (props) => <Link  {...props} />,
+              a: (props) => <ExternalLink {...props} />,
               ul: (props) => <ul {...props} className="list-disc ml-6" />,
               h2: (props) => <h2 {...props} className="text-3xl font-semibold" />,
               h3: (props) => <h3 {...props} className="text-2xl font-semibold" />,

@@ -1,31 +1,24 @@
-import { Link as RouterLink } from "@tanstack/react-router";
-import type { AnchorHTMLAttributes, ComponentProps } from "react";
+import { createLink, type LinkComponent } from "@tanstack/react-router";
+import type { AnchorHTMLAttributes } from "react";
+import React from "react";
 
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
-  to?: never;
-};
+const linkClassName = `
+  text-[var(--secondary-500)]
+  hover:text-[var(--secondary-600)]
+  weight-medium
+  underline
+  decoration-[var(--secondary-500)]
+  hover:decoration-[var(--secondary-600)]
+  decoration-1
+  underline-offset-2
+`;
 
-type InternalLinkProps = ComponentProps<typeof RouterLink> & {
-  href?: never;
-};
+const LinkAnchor = React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(
+  (props, ref) => <a ref={ref} {...props} className={linkClassName} />,
+);
 
-export type LinkProps = ExternalLinkProps | InternalLinkProps;
+export const Link: LinkComponent<typeof LinkAnchor> = createLink(LinkAnchor);
 
-export function Link(props: LinkProps) {
-  const className = `
-    text-[var(--secondary-500)] 
-    hover:text-[var(--secondary-600)] 
-    weight-medium
-    underline 
-    decoration-[var(--secondary-500)] 
-    hover:decoration-[var(--secondary-600)] 
-    decoration-1 
-    underline-offset-2 
-  `
-
-  if (props.href !== undefined) {
-    return <a {...(props )} className={className} />;
-  }
-  return <RouterLink {...(props)} className={className} />;
+export function ExternalLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return <a {...props} className={linkClassName} />;
 }
