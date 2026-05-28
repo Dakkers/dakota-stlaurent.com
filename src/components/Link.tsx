@@ -1,20 +1,24 @@
-import NextLink from "next/link";
+import { createLink, type LinkComponent } from "@tanstack/react-router";
+import type { AnchorHTMLAttributes } from "react";
+import React from "react";
 
-export function Link({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
-}) {
-  const Tag = href.startsWith("/") ? NextLink : "a";
+const linkClassName = `
+  text-[var(--secondary-500)]
+  hover:text-[var(--secondary-600)]
+  weight-medium
+  underline
+  decoration-[var(--secondary-500)]
+  hover:decoration-[var(--secondary-600)]
+  decoration-1
+  underline-offset-2
+`;
 
-  return (
-    <Tag
-      className="text-sky-700 visited:text-purple-800 dark:text-sky-400 dark:visited:text-purple-600 underline"
-      href={href}
-    >
-      {children}
-    </Tag>
-  );
+const LinkAnchor = React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(
+  (props, ref) => <a ref={ref} {...props} className={linkClassName} />,
+);
+
+export const Link: LinkComponent<typeof LinkAnchor> = createLink(LinkAnchor);
+
+export function ExternalLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return <a {...props} className={linkClassName} />;
 }

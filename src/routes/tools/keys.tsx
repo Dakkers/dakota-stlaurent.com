@@ -1,44 +1,20 @@
-"use client";
-import { PageTitle } from "@/components/PageTitle";
+import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
+import { PageTitle } from "../../components/PageTitle";
 
-const ALL_KEYS = [
-  "C",
-  "C#/Db",
-  "D",
-  "D#/Eb",
-  "E",
-  "F",
-  "F#/Gb",
-  "G",
-  "G#/Ab",
-  "A",
-  "A#/Bb",
-  "B",
-] as const;
+export const Route = createFileRoute("/tools/keys")({
+  component: RouteComponent,
+});
 
-type KEY = (typeof ALL_KEYS)[number];
-
-export default function ToolsKeys() {
+function RouteComponent() {
   return (
-    <div className="flex flex-col gap-4">
-      <PageTitle>Keys at Random</PageTitle>
-      <p>
-        Welcome to this dinky tool! It goes through all 12 keys at random; I use
-        it to practice scales, chord types, etc. without developing muscle
-        memory of moving around the circle of 5ths or some other pattern.
-      </p>
+    <main className="page-wrap px-4 py-12">
+      <section className="island-shell rounded-2xl p-6 sm:p-8">
+        <PageTitle className="mb-3">Musical Keys</PageTitle>
 
-      <p>
-        If your MIDI keyboard is plugged in when accessing this page, the lowest
-        A on the keyboard will go to the next key and the highest C will
-        restart. Also, if you use Chrome or Firefox, the computer will speak to
-        you so you don&lsquo;t have to look at the computer screen to see what
-        key it is. :)
-      </p>
-
-      <TheStuff />
-    </div>
+        <TheStuff />
+      </section>
+    </main>
   );
 }
 
@@ -49,14 +25,10 @@ function TheStuff() {
   }, []);
 
   const [letterText, setLetterText] = React.useState("---");
-  const [keysRemaining, setKeysRemaining] = React.useState(
-    shuffleArray(ALL_KEYS.slice()),
-  );
+  const [keysRemaining, setKeysRemaining] = React.useState(shuffleArray(ALL_KEYS.slice()));
   const [keysPlayed, setKeysPlayed] = React.useState<KEY[]>([]);
   const [hasMidiAccess, setHasMidiAccess] = React.useState(false);
-  const [midiAccessObj, setMidiAccessObj] = React.useState<MIDIAccess | null>(
-    null,
-  );
+  const [midiAccessObj, setMidiAccessObj] = React.useState<MIDIAccess | null>(null);
 
   const goNext = React.useCallback(() => {
     const numRemainingKeys = keysRemaining.length;
@@ -164,6 +136,7 @@ function TheStuff() {
           </li>
         ))}
       </ul>
+
       {hasStarted && (
         <>
           <p>Played:</p>
@@ -195,11 +168,28 @@ function speak(key: KEY) {
     const [, keyFlat] = key.split("/");
     contentToSpeak = keyFlat.replace("b", " flat");
   }
-  if (contentToSpeak.startsWith("A")) {
-    contentToSpeak = contentToSpeak.replace("A", "Eh");
-  }
+  //   if (contentToSpeak.startsWith("A")) {
+  //     contentToSpeak = contentToSpeak.replace("A", "Eh");
+  //   }
 
   if (!!window.speechSynthesis && !!window.speechSynthesis.speak) {
     window.speechSynthesis.speak(new SpeechSynthesisUtterance(contentToSpeak));
   }
 }
+
+const ALL_KEYS = [
+  "C",
+  "G",
+  "D",
+  "A",
+  "E",
+  "B",
+  "F#/Gb",
+  "C#/Db",
+  "G#/Ab",
+  "D#/Eb",
+  "A#/Bb",
+  "F",
+] as const;
+
+type KEY = (typeof ALL_KEYS)[number];

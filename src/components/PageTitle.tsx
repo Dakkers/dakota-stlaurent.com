@@ -1,8 +1,13 @@
-import React from "react";
+interface PageTitleProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-export function PageTitle({ children }: { children: React.ReactNode }) {
+export function PageTitle({ children, className }: PageTitleProps) {
   return (
-    <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold mb-4">
+    <h1
+      className={`display-title text-4xl font-bold text-[var(--primary-300)] sm:text-5xl${className ? ` ${className}` : ""}`}
+    >
       {children}
     </h1>
   );
