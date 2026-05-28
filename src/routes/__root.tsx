@@ -36,7 +36,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body className="font-sans antialiased h-screen [overflow-wrap:anywhere]">
         <Header />
 
-        {children}
+        <div className="page-content">{children}</div>
 
         <Scripts />
       </body>

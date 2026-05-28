@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute,  } from "@tanstack/react-router";
 import { posts } from "./posts/-posts/summary";
 import { PageTitle } from "../../components/PageTitle";
 import { CategoryChips } from "./-components/CategoryChips";
 import Markdown from "react-markdown";
+import { Link } from "#/components/Link";
 
 export const Route = createFileRoute("/blog/")({ component: Blog });
 

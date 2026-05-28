@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, } from "@tanstack/react-router";
 import { PageTitle } from "../components/PageTitle";
+import { Link } from "#/components/Link";
 
 export const Route = createFileRoute("/about")({ component: About });
 
@@ -19,7 +20,7 @@ function About() {
 
           <p>
             I&lsquo;m currently the lead UX/UI developer at{" "}
-            <a href="https://www.guardrail.ai/">Guardrail</a>. I've written almost the entire
+            <Link href="https://www.guardrail.ai/">Guardrail</Link>. I've written almost the entire
             customer-facing web application by myself! I opted to use React with a couple of the
             Tanstack tools (Router, Form, Query). My primary focus has been crafting a codebase that
             results in a good developer experience while also making it easy to ship stuff fast. I
@@ -27,7 +28,7 @@ function About() {
           </p>
 
           <p>
-            My time at <a href="https://www.applyboard.com/">ApplyBoard</a> was almost entirely on
+            My time at <Link href="https://www.applyboard.com/">ApplyBoard</Link> was almost entirely on
             the UI Engineering team, where I was responsible for the company's design system. I was
             responsible for managing much of the frontend CI tooling as well!
           </p>
@@ -45,7 +46,7 @@ function About() {
           <p>
             I spend a good chunk of my time working on home renovations, and much of that is
             animal-related – I have a couple of miniature pigs, all of which are rescues. Check out
-            their <a href="https://www.instagram.com/pigs_of_scotland/">dedicated Instagram page</a>
+            their <Link href="https://www.instagram.com/pigs_of_scotland/">dedicated Instagram page</Link>
             !
           </p>
         </div>

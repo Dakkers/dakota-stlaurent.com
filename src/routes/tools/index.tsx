@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute,  } from "@tanstack/react-router";
 import { PageTitle } from "../../components/PageTitle";
+import { Link } from "#/components/Link";
 
 export const Route = createFileRoute("/tools/")({ component: Tools });
 
