@@ -2,7 +2,7 @@ import { ClientOnly, createFileRoute, useNavigate } from "@tanstack/react-router
 import { useState, type ChangeEvent } from "react";
 import { z } from "zod";
 import { PageTitle } from "../../components/PageTitle";
-import { useMidiEvent } from "#/hooks/useMIDIEvent";
+import { useMidiEvent } from "#/hooks/useMidiEvent";
 
 const orderSchema = z.enum([
   "random",
@@ -25,7 +25,7 @@ function RouteComponent() {
   const { order } = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
   const [index, setIndex] = useState(-1);
-  const [keysList, setKeysList] = useState<KEY[]>([]);
+  const [keysList, setKeysList] = useState<Key[]>([]);
 
   const hasStarted = index >= 0;
 
