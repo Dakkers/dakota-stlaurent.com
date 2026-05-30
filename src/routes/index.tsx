@@ -8,7 +8,9 @@ function Home() {
     <main className="page-wrap py-12 flex flex-col justify-self-center">
       <section className="grow flex flex-col-reverse lg:flex-row items-center justify-center gap-8">
         <div>
-          <h1 className="text-center lg:text-left display-title text-4xl font-bold sm:text-5xl">Dakota St. Laurent</h1>
+          <h1 className="text-center lg:text-left display-title text-4xl font-bold sm:text-5xl">
+            Dakota St. Laurent
+          </h1>
           <div className="text-center lg:text-left mb-3 text-xl font-bold">
             UX/UI Developer | Producer, Composer, Songwriter
           </div>

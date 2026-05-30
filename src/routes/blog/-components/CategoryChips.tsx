@@ -22,12 +22,12 @@ interface CategoryChipsProps {
   className?: string;
 }
 
-export function CategoryChips({ categories, className = '' }: CategoryChipsProps) {
+export function CategoryChips({ categories, className = "" }: CategoryChipsProps) {
   if (categories.length === 0) return null;
   return (
     <div className={`flex flex-wrap gap-1.5 ${className}`}>
       {categories.map((cat) => (
-        <Chip key={cat} intent={getIntentForCategory(cat)} size='sm'>
+        <Chip key={cat} intent={getIntentForCategory(cat)} size="sm">
           {cat}
         </Chip>
       ))}

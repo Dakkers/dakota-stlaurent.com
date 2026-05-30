@@ -6,6 +6,12 @@
   "main": "@tanstack/react-start/server-entry",
   "assets": {
     "directory": "./dist/client",
-    "binding": "ASSETS"
-  }
+    "binding": "ASSETS",
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+    },
+  },
 }

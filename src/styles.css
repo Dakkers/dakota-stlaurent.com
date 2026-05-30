@@ -216,3 +216,25 @@ a {
   min-height: calc(100vh - var(--navbar-height));
   display: flex;
 }
+
+button {
+  background-color: var(--primary-700);
+  border: 1px solid var(--primary-700);
+  border-radius: 8px;
+  padding-inline: 16px;
+  padding-block: 12px;
+  color: var(--neutral-900);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: var(--primary-600);
+}
+
+select {
+  border: 1px solid var(--primary-700);
+  border-radius: 8px;
+  padding-inline: 16px;
+  padding-block: 12px;
+}

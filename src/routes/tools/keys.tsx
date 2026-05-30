@@ -1,156 +1,187 @@
-import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
+import { ClientOnly, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState, type ChangeEvent } from "react";
+import { z } from "zod";
 import { PageTitle } from "../../components/PageTitle";
+import { useMidiEvent } from "#/hooks/useMIDIEvent";
+
+const orderSchema = z.enum([
+  "random",
+  "fifths-asc",
+  "fifths-desc",
+  "whole-asc",
+  "whole-desc",
+  "chromatic-asc",
+  "chromatic-desc",
+]);
 
 export const Route = createFileRoute("/tools/keys")({
+  validateSearch: z.object({
+    order: orderSchema.catch("random"),
+  }),
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { order } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const [index, setIndex] = useState(-1);
+  const [keysList, setKeysList] = useState<KEY[]>([]);
+
+  const hasStarted = index >= 0;
+
+  function handleOrderChange(e: ChangeEvent<HTMLSelectElement>) {
+    const parsed = orderSchema.safeParse(e.target.value);
+    if (parsed.success) {
+      navigate({ search: { order: parsed.data }, replace: true });
+    }
+  }
+
+  function startPractice() {
+    const keysList = createKeysOrdering(order);
+    goToStep(0);
+    speak(keysList[0]);
+    setKeysList(keysList);
+  }
+
+  function goToStep(newIndex: number) {
+    setIndex(newIndex);
+  }
+
+  function goNext() {
+    const newIndex = index + 1;
+    if (newIndex >= keysList.length) {
+      exitPractice();
+    } else {
+      goToStep(newIndex);
+      speak(keysList[newIndex]);
+    }
+  }
+
+  function exitPractice() {
+    setIndex(-1);
+  }
+
+  function onMidiMessageNoteOnEvent(note: number) {
+    if (note === 21) {
+      goNext();
+    } else if (note === 108) {
+      exitPractice();
+    }
+  }
+
   return (
     <main className="page-wrap px-4 py-12">
       <section className="island-shell rounded-2xl p-6 sm:p-8">
         <PageTitle className="mb-3">Musical Keys</PageTitle>
 
-        <TheStuff />
+        <div className="flex py-8 justify-center">
+          {!hasStarted ? (
+            <div>
+              <select className="mb-4" value={order} onChange={handleOrderChange}>
+                <option value="random">Random</option>
+                <option value="fifths-asc">Circle of fifths (ascending)</option>
+                <option value="fifths-desc">Circle of fifths (descending)</option>
+                <option value="whole-asc">Whole step (ascending)</option>
+                <option value="whole-desc">Whole step (descending)</option>
+                <option value="chromatic-asc">Chromatic (ascending)</option>
+                <option value="chromatic-desc">Chromatic (descending)</option>
+              </select>
+
+              <button className="cursor-pointer p-3" onClick={startPractice}>
+                Start
+              </button>
+            </div>
+          ) : (
+            <div className="grow">
+              <div className="text-8xl text-center">{keysList[index]}</div>
+
+              <hr className="my-12" />
+
+              <div className="flex gap-2 justify-between items-center">
+                <button onClick={exitPractice}>Exit</button>
+                <div>
+                  Key {index + 1} of {keysList.length}
+                </div>
+                <button onClick={goNext}>Next</button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <ClientOnly>
+          <MidiDeviceAccessor onMidiMessageNoteOnEvent={onMidiMessageNoteOnEvent} />
+        </ClientOnly>
+
+        {/* <TheStuff /> */}
       </section>
     </main>
   );
 }
 
-function TheStuff() {
-  const [hasMounted, setHasMounted] = React.useState(false);
-  React.useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  const [letterText, setLetterText] = React.useState("---");
-  const [keysRemaining, setKeysRemaining] = React.useState(shuffleArray(ALL_KEYS.slice()));
-  const [keysPlayed, setKeysPlayed] = React.useState<KEY[]>([]);
-  const [hasMidiAccess, setHasMidiAccess] = React.useState(false);
-  const [midiAccessObj, setMidiAccessObj] = React.useState<MIDIAccess | null>(null);
-
-  const goNext = React.useCallback(() => {
-    const numRemainingKeys = keysRemaining.length;
-    if (numRemainingKeys === 0) {
-      setLetterText("---");
-    } else {
-      const key = keysRemaining[0];
-      setKeysPlayed([...keysPlayed, key]);
-      setKeysRemaining(keysRemaining.slice(1));
-      speak(key);
-      setLetterText(key);
-    }
-  }, [keysPlayed, keysRemaining]);
-
-  const restart = React.useCallback(() => {
-    setLetterText("---");
-    setKeysRemaining(shuffleArray(ALL_KEYS.slice()));
-    setKeysPlayed([]);
-  }, []);
-
-  const noteOn = React.useCallback(
-    (note: number) => {
-      if (note === 21) {
-        goNext();
-      } else if (note === 108) {
-        restart();
-      }
-    },
-    [goNext, restart],
-  );
-
-  const getMidiMessage = React.useCallback(
-    (message: MIDIMessageEvent) => {
-      if (!message.data) {
-        return;
-      }
-
-      const command = message.data[0];
-      const note = message.data[1];
-      const velocity = message.data.length > 2 ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
-
-      switch (command) {
-        case 144: // noteOn
-          if (velocity > 0) {
-            noteOn(note);
-          }
-          break;
-        default:
-          break;
-      }
-    },
-    [noteOn],
-  );
-
-  const hasStarted = keysPlayed.length > 0;
-
-  React.useEffect(() => {
-    if (hasMidiAccess && !!midiAccessObj) {
-      for (const input of midiAccessObj.inputs.values()) {
-        input.onmidimessage = getMidiMessage;
-      }
+function MidiDeviceAccessor(props: { onMidiMessageNoteOnEvent: (note: number) => void }) {
+  useMidiEvent((message: MIDIMessageEvent) => {
+    if (!message.data) {
       return;
     }
 
-    try {
-      navigator
-        .requestMIDIAccess()
-        .then((midiAccess) => {
-          setHasMidiAccess(true);
-          setMidiAccessObj(midiAccess);
-          console.log("got midi access");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (err) {
-      console.error(err);
+    const command = message.data[0];
+    const note = message.data[1];
+    const velocity = message.data.length > 2 ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
+
+    switch (command) {
+      case 144: // noteOn
+        if (velocity > 0) {
+          props.onMidiMessageNoteOnEvent(note);
+        }
+        break;
+      default:
+        break;
     }
-  }, [getMidiMessage, hasMidiAccess, midiAccessObj]);
+  });
 
-  if (!hasMounted) {
-    return null;
+  return null;
+}
+
+function createKeysOrdering(order: z.infer<typeof orderSchema>): Key[] {
+  const allKeys = keySchema.options.slice().filter((key) => !hasSharp(key));
+
+  switch (order) {
+    case "fifths-asc": {
+      const result: Key[] = [];
+      let i = 0;
+      for (let step = 0; step < allKeys.length; step++) {
+        result.push(allKeys[i]);
+        i = (i + 7) % allKeys.length;
+      }
+      return result;
+    }
+    case "fifths-desc": {
+      const result: Key[] = [];
+      let i = 0;
+      for (let step = 0; step < allKeys.length; step++) {
+        result.push(allKeys[i]);
+        i = (i + 5) % allKeys.length;
+      }
+      return result;
+    }
+    case "chromatic-asc":
+      return allKeys;
+    case "chromatic-desc":
+      return ["C" as const, ...allKeys.slice(1).reverse()];
+    case "whole-asc":
+      return [...allKeys.filter((_, i) => i % 2 === 0), ...allKeys.filter((_, i) => i % 2 !== 0)];
+    case "whole-desc":
+      return [
+        allKeys[0],
+        ...allKeys
+          .filter((_, i) => i % 2 === 0)
+          .slice(1)
+          .reverse(),
+        ...allKeys.filter((_, i) => i % 2 !== 0).reverse(),
+      ];
+    case "random":
+      return shuffleArray(allKeys.slice());
   }
-
-  return (
-    <>
-      <div className="flex gap-4  ">
-        <button className="cursor-pointer bg-slate-300 p-3" onClick={goNext}>
-          {!hasStarted ? "Start" : "Next"}
-        </button>
-        {hasStarted && (
-          <button className="cursor-pointer bg-slate-300 p-3" onClick={restart}>
-            Restart
-          </button>
-        )}
-      </div>
-
-      <p className="text-5xl">{letterText}</p>
-
-      <p>Remaining:</p>
-      <ul className="list-disc">
-        {keysRemaining.map((key) => (
-          <li className="ml-8" key={key}>
-            {key}
-          </li>
-        ))}
-      </ul>
-
-      {hasStarted && (
-        <>
-          <p>Played:</p>
-          <ul className="list-disc">
-            {keysPlayed.map((key) => (
-              <li className="ml-8" key={key}>
-                {key}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-    </>
-  );
 }
 
 function shuffleArray<T>(array: T[]) {
@@ -162,34 +193,67 @@ function shuffleArray<T>(array: T[]) {
   return copy;
 }
 
-function speak(key: KEY) {
+function speak(key: Key) {
   let contentToSpeak: string = key;
-  if (key.includes("#")) {
-    const [, keyFlat] = key.split("/");
-    contentToSpeak = keyFlat.replace("b", " flat");
-  }
-  //   if (contentToSpeak.startsWith("A")) {
-  //     contentToSpeak = contentToSpeak.replace("A", "Eh");
-  //   }
 
-  if (!!window.speechSynthesis && !!window.speechSynthesis.speak) {
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(contentToSpeak));
+  if (key.includes("♭")) {
+    contentToSpeak = contentToSpeak.replace("♭", " flat");
   }
+  if (key.includes("♯")) {
+    contentToSpeak = contentToSpeak.replace("♯", " sharp");
+  }
+
+  const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+  if (contentToSpeak.startsWith("A")) {
+    if (isChrome) {
+      contentToSpeak = contentToSpeak.replace("A", "eh");
+    } else {
+      contentToSpeak = contentToSpeak.replace("A", "a-");
+    }
+  }
+
+  if (isChrome) {
+    contentToSpeak = contentToSpeak.toLowerCase();
+  }
+
+  window.speechSynthesis?.speak?.(new SpeechSynthesisUtterance(contentToSpeak));
 }
 
-const ALL_KEYS = [
-  "C",
-  "G",
-  "D",
-  "A",
-  "E",
-  "B",
-  "F#/Gb",
-  "C#/Db",
-  "G#/Ab",
-  "D#/Eb",
-  "A#/Bb",
-  "F",
-] as const;
+function hasSharp(str: string) {
+  return str.includes("♯");
+}
 
-type KEY = (typeof ALL_KEYS)[number];
+function hasFlat(str: string) {
+  return str.includes("♭");
+}
+
+const keySchema = z.enum([
+  "C",
+  "C♯",
+  "D♭",
+  "D",
+  "D♯",
+  "E♭",
+  "E",
+  "F",
+  "F♯",
+  "G♭",
+  "G",
+  "G♯",
+  "A♭",
+  "A",
+  "A♯",
+  "B♭",
+  "B",
+]);
+
+type Key = z.infer<typeof keySchema>;
+
+const someMapping: Array<[Key, Key]> = [
+  ["F♯", "G♭"],
+  ["C♯", "D♭"],
+  ["G♯", "A♭"],
+  ["D♯", "E♭"],
+  ["A♯", "B♭"],
+];
