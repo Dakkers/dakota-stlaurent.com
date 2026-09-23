@@ -8,163 +8,170 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as MusicRouteImport } from "./routes/music";
-import { Route as AboutRouteImport } from "./routes/about";
-import { Route as IndexRouteImport } from "./routes/index";
-import { Route as ToolsIndexRouteImport } from "./routes/tools/index";
-import { Route as BlogIndexRouteImport } from "./routes/blog/index";
-import { Route as ToolsKeysRouteImport } from "./routes/tools/keys";
-import { Route as BlogPostsPostSlugRouteImport } from "./routes/blog/posts/$postSlug";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as MusicRouteImport } from './routes/music'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools/index'
+import { Route as ToolsKeysRouteImport } from './routes/tools/keys'
+import { Route as BlogPostsPostSlugRouteImport } from './routes/blog/posts/$postSlug'
 
-const MusicRoute = MusicRouteImport.update({
-  id: "/music",
-  path: "/music",
-  getParentRoute: () => rootRouteImport,
-} as any);
-const AboutRoute = AboutRouteImport.update({
-  id: "/about",
-  path: "/about",
-  getParentRoute: () => rootRouteImport,
-} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
-const ToolsIndexRoute = ToolsIndexRouteImport.update({
-  id: "/tools/",
-  path: "/tools/",
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
+const MusicRoute = MusicRouteImport.update({
+  id: '/music',
+  path: '/music',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: "/blog/",
-  path: "/blog/",
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsKeysRoute = ToolsKeysRouteImport.update({
-  id: "/tools/keys",
-  path: "/tools/keys",
+  id: '/tools/keys',
+  path: '/tools/keys',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const BlogPostsPostSlugRoute = BlogPostsPostSlugRouteImport.update({
-  id: "/blog/posts/$postSlug",
-  path: "/blog/posts/$postSlug",
+  id: '/blog/posts/$postSlug',
+  path: '/blog/posts/$postSlug',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/music": typeof MusicRoute;
-  "/tools/keys": typeof ToolsKeysRoute;
-  "/blog/": typeof BlogIndexRoute;
-  "/tools/": typeof ToolsIndexRoute;
-  "/blog/posts/$postSlug": typeof BlogPostsPostSlugRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/music': typeof MusicRoute
+  '/tools/keys': typeof ToolsKeysRoute
+  '/blog/': typeof BlogIndexRoute
+  '/tools/': typeof ToolsIndexRoute
+  '/blog/posts/$postSlug': typeof BlogPostsPostSlugRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/music": typeof MusicRoute;
-  "/tools/keys": typeof ToolsKeysRoute;
-  "/blog": typeof BlogIndexRoute;
-  "/tools": typeof ToolsIndexRoute;
-  "/blog/posts/$postSlug": typeof BlogPostsPostSlugRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/music': typeof MusicRoute
+  '/tools/keys': typeof ToolsKeysRoute
+  '/blog': typeof BlogIndexRoute
+  '/tools': typeof ToolsIndexRoute
+  '/blog/posts/$postSlug': typeof BlogPostsPostSlugRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/music": typeof MusicRoute;
-  "/tools/keys": typeof ToolsKeysRoute;
-  "/blog/": typeof BlogIndexRoute;
-  "/tools/": typeof ToolsIndexRoute;
-  "/blog/posts/$postSlug": typeof BlogPostsPostSlugRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/music': typeof MusicRoute
+  '/tools/keys': typeof ToolsKeysRoute
+  '/blog/': typeof BlogIndexRoute
+  '/tools/': typeof ToolsIndexRoute
+  '/blog/posts/$postSlug': typeof BlogPostsPostSlugRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | "/about"
-    | "/music"
-    | "/tools/keys"
-    | "/blog/"
-    | "/tools/"
-    | "/blog/posts/$postSlug";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/about" | "/music" | "/tools/keys" | "/blog" | "/tools" | "/blog/posts/$postSlug";
+    | '/'
+    | '/about'
+    | '/music'
+    | '/tools/keys'
+    | '/blog/'
+    | '/tools/'
+    | '/blog/posts/$postSlug'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/about'
+    | '/music'
+    | '/tools/keys'
+    | '/blog'
+    | '/tools'
+    | '/blog/posts/$postSlug'
   id:
-    | "__root__"
-    | "/"
-    | "/about"
-    | "/music"
-    | "/tools/keys"
-    | "/blog/"
-    | "/tools/"
-    | "/blog/posts/$postSlug";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/music'
+    | '/tools/keys'
+    | '/blog/'
+    | '/tools/'
+    | '/blog/posts/$postSlug'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
-  MusicRoute: typeof MusicRoute;
-  ToolsKeysRoute: typeof ToolsKeysRoute;
-  BlogIndexRoute: typeof BlogIndexRoute;
-  ToolsIndexRoute: typeof ToolsIndexRoute;
-  BlogPostsPostSlugRoute: typeof BlogPostsPostSlugRoute;
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  MusicRoute: typeof MusicRoute
+  ToolsKeysRoute: typeof ToolsKeysRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
+  BlogPostsPostSlugRoute: typeof BlogPostsPostSlugRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/music": {
-      id: "/music";
-      path: "/music";
-      fullPath: "/music";
-      preLoaderRoute: typeof MusicRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/tools/": {
-      id: "/tools/";
-      path: "/tools";
-      fullPath: "/tools/";
-      preLoaderRoute: typeof ToolsIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/blog/": {
-      id: "/blog/";
-      path: "/blog";
-      fullPath: "/blog/";
-      preLoaderRoute: typeof BlogIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/tools/keys": {
-      id: "/tools/keys";
-      path: "/tools/keys";
-      fullPath: "/tools/keys";
-      preLoaderRoute: typeof ToolsKeysRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/blog/posts/$postSlug": {
-      id: "/blog/posts/$postSlug";
-      path: "/blog/posts/$postSlug";
-      fullPath: "/blog/posts/$postSlug";
-      preLoaderRoute: typeof BlogPostsPostSlugRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/music': {
+      id: '/music'
+      path: '/music'
+      fullPath: '/music'
+      preLoaderRoute: typeof MusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/keys': {
+      id: '/tools/keys'
+      path: '/tools/keys'
+      fullPath: '/tools/keys'
+      preLoaderRoute: typeof ToolsKeysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/posts/$postSlug': {
+      id: '/blog/posts/$postSlug'
+      path: '/blog/posts/$postSlug'
+      fullPath: '/blog/posts/$postSlug'
+      preLoaderRoute: typeof BlogPostsPostSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -176,16 +183,16 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   BlogPostsPostSlugRoute: BlogPostsPostSlugRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx";
-import type { createStart } from "@tanstack/react-start";
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
