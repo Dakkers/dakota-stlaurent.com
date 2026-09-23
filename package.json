@@ -6,16 +6,16 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest run",
+    "dev": "vite dev --config .config/vite.config.ts --port 3000",
+    "build": "vite build --config .config/vite.config.ts",
+    "preview": "vite preview --config .config/vite.config.ts",
+    "test": "vitest run --config .config/vite.config.ts",
     "deploy": "pnpm build && wrangler deploy",
-    "lint": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "lint": "oxlint -c .config/.oxlintrc.json --fix",
+    "fmt": "oxfmt -c .config/.oxfmtrc.json --ignore-path .gitignore --ignore-path .config/.oxfmtignore",
+    "fmt:check": "oxfmt -c .config/.oxfmtrc.json --ignore-path .gitignore --ignore-path .config/.oxfmtignore --check",
     "typecheck": "tsc --noEmit",
-    "lint:check": "oxlint"
+    "lint:check": "oxlint -c .config/.oxlintrc.json"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "1.39.0",
