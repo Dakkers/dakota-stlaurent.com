@@ -11,3 +11,4 @@ __unconfig*
 todos.json
 
 .env.*.local
+storybook-static
