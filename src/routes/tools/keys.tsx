@@ -16,7 +16,7 @@ const orderSchema = z.enum([
 
 export const Route = createFileRoute("/tools/keys")({
   validateSearch: z.object({
-    order: orderSchema.catch("random"),
+    order: orderSchema.default("random").catch("random"),
   }),
   component: RouteComponent,
 });
