@@ -16,7 +16,7 @@ const orderSchema = z.enum([
 
 export const Route = createFileRoute("/tools/keys")({
   validateSearch: z.object({
-    order: orderSchema.catch("random"),
+    order: orderSchema.default("random").catch("random"),
   }),
   component: RouteComponent,
 });
@@ -224,10 +224,6 @@ function hasSharp(str: string) {
   return str.includes("♯");
 }
 
-function hasFlat(str: string) {
-  return str.includes("♭");
-}
-
 const keySchema = z.enum([
   "C",
   "C♯",
@@ -249,11 +245,3 @@ const keySchema = z.enum([
 ]);
 
 type Key = z.infer<typeof keySchema>;
-
-const someMapping: Array<[Key, Key]> = [
-  ["F♯", "G♭"],
-  ["C♯", "D♭"],
-  ["G♯", "A♭"],
-  ["D♯", "E♭"],
-  ["A♯", "B♭"],
-];
