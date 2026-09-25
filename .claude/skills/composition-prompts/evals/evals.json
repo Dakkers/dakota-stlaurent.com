@@ -1,0 +1,73 @@
+{
+  "skill_name": "composition-prompts",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "just watched this one on rare chords in video game music, can you give me some composition exercises from it? transcripts/evals/FekJvtUX6oA.txt",
+      "expected_output": "transcripts/evals/FekJvtUX6oA.prompts.md with 6-10 video-specific, constrained, sized prompts",
+      "files": [
+        "transcripts/evals/FekJvtUX6oA.txt"
+      ],
+      "assertions": [
+        "Has between 6 and 10 numbered prompts",
+        "Every prompt is labelled with a size (Warm-up / Study / Sketch) and a time estimate",
+        "Every prompt names which idea from the video it practises",
+        "Every prompt has a self-check line (Listen for / Check)",
+        "Every prompt gives concrete constraints (key/mode, meter, or bar count)",
+        "Prompts are instrument-agnostic (no instrument required unless an alternative is offered)",
+        "Includes a 'Key ideas from the video' summary and the source URL"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "turn transcripts/evals/joL-P0M1HjI.txt into practice prompts for me",
+      "expected_output": "transcripts/evals/joL-P0M1HjI.prompts.md with 6-10 video-specific, constrained, sized prompts",
+      "files": [
+        "transcripts/evals/joL-P0M1HjI.txt"
+      ],
+      "assertions": [
+        "Has between 6 and 10 numbered prompts",
+        "Every prompt is labelled with a size (Warm-up / Study / Sketch) and a time estimate",
+        "Every prompt names which idea from the video it practises",
+        "Every prompt has a self-check line (Listen for / Check)",
+        "Every prompt gives concrete constraints (key/mode, meter, or bar count)",
+        "Prompts are instrument-agnostic (no instrument required unless an alternative is offered)",
+        "Includes a 'Key ideas from the video' summary and the source URL"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want to practice what this video covered: transcripts/evals/cmsqkgppBtc.txt",
+      "expected_output": "transcripts/evals/cmsqkgppBtc.prompts.md with 6-10 video-specific, constrained, sized prompts",
+      "files": [
+        "transcripts/evals/cmsqkgppBtc.txt"
+      ],
+      "assertions": [
+        "Has between 6 and 10 numbered prompts",
+        "Every prompt is labelled with a size (Warm-up / Study / Sketch) and a time estimate",
+        "Every prompt names which idea from the video it practises",
+        "Every prompt has a self-check line (Listen for / Check)",
+        "Every prompt gives concrete constraints (key/mode, meter, or bar count)",
+        "Prompts are instrument-agnostic (no instrument required unless an alternative is offered)",
+        "Includes a 'Key ideas from the video' summary and the source URL"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "give me some small writing prompts based on transcripts/evals/14lZ2g_oCxI.txt, I want to get better at chords like this",
+      "expected_output": "transcripts/evals/14lZ2g_oCxI.prompts.md with 6-10 video-specific, constrained, sized prompts",
+      "files": [
+        "transcripts/evals/14lZ2g_oCxI.txt"
+      ],
+      "assertions": [
+        "Has between 6 and 10 numbered prompts",
+        "Every prompt is labelled with a size (Warm-up / Study / Sketch) and a time estimate",
+        "Every prompt names which idea from the video it practises",
+        "Every prompt has a self-check line (Listen for / Check)",
+        "Every prompt gives concrete constraints (key/mode, meter, or bar count)",
+        "Prompts are instrument-agnostic (no instrument required unless an alternative is offered)",
+        "Includes a 'Key ideas from the video' summary and the source URL"
+      ]
+    }
+  ]
+}
