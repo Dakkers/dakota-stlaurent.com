@@ -4,16 +4,34 @@ import { ExternalLink } from "#/components/Link";
 
 export const Route = createFileRoute("/pigs")({ component: Pigs });
 
-const pigs = ["Poppy", "Lulu", "Berta"];
-
 const gallery = [
-  { src: "/pigs/pig-1.jpg", alt: "A pig sitting in a muddy puddle beside a blue kiddie pool" },
-  { src: "/pigs/pig-2.jpg", alt: "A pale pink and grey pig lying down and looking at the camera" },
-  { src: "/pigs/pig-3.jpg", alt: "A dark pig resting in the leaves beneath some bushes" },
-  { src: "/pigs/pig-4.jpg", alt: "A close-up of a black pig's snout" },
-  { src: "/pigs/pig-5.jpg", alt: "A grey and black spotted pig with a blue glove on its head" },
-  { src: "/pigs/pig-6.jpg", alt: "A dark pig napping in the grass" },
-  { src: "/pigs/pig-7.jpg", alt: "A black pig standing in the grass with its snout raised" },
+  {
+    name: "Lulu",
+    src: "/pigs/lulu.jpg",
+    alt: "Lulu sitting in a muddy puddle beside a blue kiddie pool",
+  },
+  {
+    name: "Marge",
+    src: "/pigs/marge.jpg",
+    alt: "Marge, a pale pink and grey pig, lying down and looking at the camera",
+  },
+  {
+    name: "MaryKate",
+    src: "/pigs/marykate.jpg",
+    alt: "MaryKate resting in the leaves beneath some bushes",
+  },
+  { name: "Poppy", src: "/pigs/poppy.jpg", alt: "A close-up of Poppy's snout" },
+  {
+    name: "Pua",
+    src: "/pigs/pua.jpg",
+    alt: "Pua, a grey and black spotted pig, with a blue glove on her head",
+  },
+  { name: "Ashley", src: "/pigs/ashley.jpg", alt: "Ashley napping in the grass" },
+  {
+    name: "Berta",
+    src: "/pigs/berta.jpg",
+    alt: "Berta standing in the grass with her snout raised",
+  },
 ];
 
 function Pigs() {
@@ -23,10 +41,7 @@ function Pigs() {
         <PageTitle className="mb-3">My pigs 🐷</PageTitle>
 
         <div className="flex flex-col text-lg gap-4 mt-4">
-          <p>
-            I share my home with a few miniature pigs, and every one of them is a rescue. Meet{" "}
-            {pigs.slice(0, -1).join(", ")} and {pigs[pigs.length - 1]}!
-          </p>
+          <p>Every one of my miniature pigs is a rescue. Meet the whole crew!</p>
 
           <p>
             Want to see more? They have their own page on Instagram:{" "}
@@ -53,14 +68,17 @@ function Pigs() {
         <hr className="mt-10" />
 
         <ul className="mt-8 grid list-none grid-cols-2 gap-3 p-0 md:grid-cols-3">
-          {gallery.map(({ src, alt }) => (
+          {gallery.map(({ name, src, alt }) => (
             <li key={src}>
-              <img
-                alt={alt}
-                className="aspect-[3/4] w-full rounded object-cover"
-                loading="lazy"
-                src={src}
-              />
+              <figure>
+                <img
+                  alt={alt}
+                  className="aspect-[3/4] w-full rounded object-cover"
+                  loading="lazy"
+                  src={src}
+                />
+                <figcaption className="italic text-sm pt-1 text-center">{name}</figcaption>
+              </figure>
             </li>
           ))}
         </ul>
