@@ -9,10 +9,13 @@ interface Pig {
   subtitle: string;
   bio: string;
   photo: { src: string; alt: string };
+  adopted?: string;
+  approxBirthYear?: number;
 }
 
 const subtitlePlaceholder = "Cheeky title coming soon";
 const bioPlaceholder = "A bit about this pig coming soon.";
+const detailPlaceholder = "Coming soon";
 
 const pigs: Pig[] = [
   {
@@ -74,6 +77,23 @@ const pigs: Pig[] = [
   },
 ];
 
+const pigsByAdoption = [...pigs].sort((a, b) =>
+  (a.adopted ?? "9999").localeCompare(b.adopted ?? "9999"),
+);
+
+function formatAdopted(adopted: string) {
+  return new Date(adopted).toLocaleDateString("en-CA", {
+    year: "numeric",
+    month: "long",
+    timeZone: "UTC",
+  });
+}
+
+function formatAge(approxBirthYear: number) {
+  const years = new Date().getFullYear() - approxBirthYear;
+  return years < 1 ? "Under a year old" : `About ${years} ${years === 1 ? "year" : "years"} old`;
+}
+
 function Pigs() {
   return (
     <main className="page-wrap px-4 py-12">
@@ -93,7 +113,7 @@ function Pigs() {
         </div>
 
         <ul className="mt-8 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
-          {pigs.map((pig) => (
+          {pigsByAdoption.map((pig) => (
             <li key={pig.name}>
               <PigCard pig={pig} />
             </li>
@@ -104,7 +124,7 @@ function Pigs() {
   );
 }
 
-function PigCard({ pig: { name, subtitle, bio, photo } }: { pig: Pig }) {
+function PigCard({ pig: { name, subtitle, bio, photo, adopted, approxBirthYear } }: { pig: Pig }) {
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--surface-strong)]">
       <img
@@ -116,6 +136,12 @@ function PigCard({ pig: { name, subtitle, bio, photo } }: { pig: Pig }) {
       <div className="flex flex-col gap-1 p-5">
         <h2 className="display-title text-2xl font-bold text-[var(--primary-300)]">{name}</h2>
         <p className="text-sm font-semibold italic text-[var(--secondary-500)]">{subtitle}</p>
+        <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm text-[var(--primary-400)]">
+          <dt className="font-semibold text-[var(--primary-300)]">Adopted</dt>
+          <dd>{adopted ? formatAdopted(adopted) : detailPlaceholder}</dd>
+          <dt className="font-semibold text-[var(--primary-300)]">Age</dt>
+          <dd>{approxBirthYear ? formatAge(approxBirthYear) : detailPlaceholder}</dd>
+        </dl>
         <p className="mt-3 text-base leading-7 text-[var(--primary-400)]">{bio}</p>
       </div>
     </article>
