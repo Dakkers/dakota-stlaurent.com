@@ -4,33 +4,73 @@ import { ExternalLink } from "#/components/Link";
 
 export const Route = createFileRoute("/pigs")({ component: Pigs });
 
-const gallery = [
+interface Pig {
+  name: string;
+  subtitle: string;
+  bio: string;
+  photo: { src: string; alt: string };
+}
+
+const subtitlePlaceholder = "Cheeky title coming soon";
+const bioPlaceholder = "A bit about this pig coming soon.";
+
+const pigs: Pig[] = [
   {
     name: "Lulu",
-    src: "/pigs/lulu.jpg",
-    alt: "Lulu sitting in a muddy puddle beside a blue kiddie pool",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: {
+      src: "/pigs/lulu.jpg",
+      alt: "Lulu sitting in a muddy puddle beside a blue kiddie pool",
+    },
   },
   {
     name: "Marge",
-    src: "/pigs/marge.jpg",
-    alt: "Marge, a pale pink and grey pig, lying down and looking at the camera",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: {
+      src: "/pigs/marge.jpg",
+      alt: "Marge, a pale pink and grey pig, lying down and looking at the camera",
+    },
   },
   {
     name: "MaryKate",
-    src: "/pigs/marykate.jpg",
-    alt: "MaryKate resting in the leaves beneath some bushes",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: {
+      src: "/pigs/marykate.jpg",
+      alt: "MaryKate resting in the leaves beneath some bushes",
+    },
   },
-  { name: "Poppy", src: "/pigs/poppy.jpg", alt: "A close-up of Poppy's snout" },
+  {
+    name: "Poppy",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: { src: "/pigs/poppy.jpg", alt: "A close-up of Poppy's snout" },
+  },
   {
     name: "Pua",
-    src: "/pigs/pua.jpg",
-    alt: "Pua, a grey and black spotted pig, with a blue glove on her head",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: {
+      src: "/pigs/pua.jpg",
+      alt: "Pua, a grey and black spotted pig, with a blue glove on her head",
+    },
   },
-  { name: "Ashley", src: "/pigs/ashley.jpg", alt: "Ashley napping in the grass" },
+  {
+    name: "Ashley",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: { src: "/pigs/ashley.jpg", alt: "Ashley napping in the grass" },
+  },
   {
     name: "Berta",
-    src: "/pigs/berta.jpg",
-    alt: "Berta standing in the grass with her snout raised",
+    subtitle: subtitlePlaceholder,
+    bio: bioPlaceholder,
+    photo: {
+      src: "/pigs/berta.jpg",
+      alt: "Berta standing in the grass with her snout raised",
+    },
   },
 ];
 
@@ -52,37 +92,32 @@ function Pigs() {
           </p>
         </div>
 
-        <div className="flex justify-center mt-8">
-          <figure>
-            <img
-              alt="Poppy, Lulu, and Berta, my miniature pigs"
-              className="rounded max-w-none h-[200px] w-[250px] md:h-[400px] md:w-[500px]"
-              src="/pigs.jpg"
-            />
-            <figcaption className="italic text-sm pt-1 text-center">
-              From left: Poppy, Lulu, Berta
-            </figcaption>
-          </figure>
-        </div>
-
-        <hr className="mt-10" />
-
-        <ul className="mt-8 grid list-none grid-cols-2 gap-3 p-0 md:grid-cols-3">
-          {gallery.map(({ name, src, alt }) => (
-            <li key={src}>
-              <figure>
-                <img
-                  alt={alt}
-                  className="aspect-[3/4] w-full rounded object-cover"
-                  loading="lazy"
-                  src={src}
-                />
-                <figcaption className="italic text-sm pt-1 text-center">{name}</figcaption>
-              </figure>
+        <ul className="mt-8 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {pigs.map((pig) => (
+            <li key={pig.name}>
+              <PigCard pig={pig} />
             </li>
           ))}
         </ul>
       </section>
     </main>
+  );
+}
+
+function PigCard({ pig: { name, subtitle, bio, photo } }: { pig: Pig }) {
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--surface-strong)]">
+      <img
+        alt={photo.alt}
+        className="aspect-[4/5] w-full object-cover"
+        loading="lazy"
+        src={photo.src}
+      />
+      <div className="flex flex-col gap-1 p-5">
+        <h2 className="display-title text-2xl font-bold text-[var(--primary-300)]">{name}</h2>
+        <p className="text-sm font-semibold italic text-[var(--secondary-500)]">{subtitle}</p>
+        <p className="mt-3 text-base leading-7 text-[var(--primary-400)]">{bio}</p>
+      </div>
+    </article>
   );
 }
