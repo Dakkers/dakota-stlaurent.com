@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as MusicRouteImport } from './routes/music'
+import { Route as PigsRouteImport } from './routes/pigs'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
@@ -31,6 +32,11 @@ const AboutRoute = AboutRouteImport.update({
 const MusicRoute = MusicRouteImport.update({
   id: '/music',
   path: '/music',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PigsRoute = PigsRouteImport.update({
+  id: '/pigs',
+  path: '/pigs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkRoute = WorkRouteImport.update({
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/music': typeof MusicRoute
+  '/pigs': typeof PigsRoute
   '/work': typeof WorkRoute
   '/tools/keys': typeof ToolsKeysRoute
   '/blog/': typeof BlogIndexRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/music': typeof MusicRoute
+  '/pigs': typeof PigsRoute
   '/work': typeof WorkRoute
   '/tools/keys': typeof ToolsKeysRoute
   '/blog': typeof BlogIndexRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/music': typeof MusicRoute
+  '/pigs': typeof PigsRoute
   '/work': typeof WorkRoute
   '/tools/keys': typeof ToolsKeysRoute
   '/blog/': typeof BlogIndexRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/music'
+    | '/pigs'
     | '/work'
     | '/tools/keys'
     | '/blog/'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/music'
+    | '/pigs'
     | '/work'
     | '/tools/keys'
     | '/blog'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/music'
+    | '/pigs'
     | '/work'
     | '/tools/keys'
     | '/blog/'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   MusicRoute: typeof MusicRoute
+  PigsRoute: typeof PigsRoute
   WorkRoute: typeof WorkRoute
   ToolsKeysRoute: typeof ToolsKeysRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/music'
       fullPath: '/music'
       preLoaderRoute: typeof MusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pigs': {
+      id: '/pigs'
+      path: '/pigs'
+      fullPath: '/pigs'
+      preLoaderRoute: typeof PigsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work': {
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   MusicRoute: MusicRoute,
+  PigsRoute: PigsRoute,
   WorkRoute: WorkRoute,
   ToolsKeysRoute: ToolsKeysRoute,
   BlogIndexRoute: BlogIndexRoute,
