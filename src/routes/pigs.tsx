@@ -6,6 +6,16 @@ export const Route = createFileRoute("/pigs")({ component: Pigs });
 
 const pigs = ["Poppy", "Lulu", "Berta"];
 
+const gallery = [
+  { src: "/pigs/pig-1.jpg", alt: "A pig sitting in a muddy puddle beside a blue kiddie pool" },
+  { src: "/pigs/pig-2.jpg", alt: "A pale pink and grey pig lying down and looking at the camera" },
+  { src: "/pigs/pig-3.jpg", alt: "A dark pig resting in the leaves beneath some bushes" },
+  { src: "/pigs/pig-4.jpg", alt: "A close-up of a black pig's snout" },
+  { src: "/pigs/pig-5.jpg", alt: "A grey and black spotted pig with a blue glove on its head" },
+  { src: "/pigs/pig-6.jpg", alt: "A dark pig napping in the grass" },
+  { src: "/pigs/pig-7.jpg", alt: "A black pig standing in the grass with its snout raised" },
+];
+
 function Pigs() {
   return (
     <main className="page-wrap px-4 py-12">
@@ -39,6 +49,21 @@ function Pigs() {
             </figcaption>
           </figure>
         </div>
+
+        <hr className="mt-10" />
+
+        <ul className="mt-8 grid list-none grid-cols-2 gap-3 p-0 md:grid-cols-3">
+          {gallery.map(({ src, alt }) => (
+            <li key={src}>
+              <img
+                alt={alt}
+                className="aspect-[3/4] w-full rounded object-cover"
+                loading="lazy"
+                src={src}
+              />
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );
