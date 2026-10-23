@@ -9,6 +9,7 @@ export default function Navbar() {
             [
               ["/", "Home"],
               ["/about", "About"],
+              ["/pigs", "Pigs"],
               ["/blog", "Blog"],
               // ["/music", "Music"],
               // ["/tools", "Tools"],
