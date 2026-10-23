@@ -37,6 +37,27 @@ function Work() {
             company's design system. I was responsible for managing much of the frontend CI tooling
             as well!
           </p>
+
+          <hr />
+
+          <h2 className="text-2xl font-bold">Personal projects</h2>
+
+          <ul className="flex flex-col gap-3 list-disc pl-6">
+            <li>
+              <ExternalLink href="https://github.com/Saintly-Software/baritone">
+                Baritone
+              </ExternalLink>{" "}
+              – a whitelabel-first React design system built on vanilla-extract and base-ui.
+            </li>
+            <li>
+              <ExternalLink href="https://github.com/Dakkers/ChessersEngine">Chessers</ExternalLink>{" "}
+              – a chess variant, with an open-source C# engine.
+            </li>
+            <li>
+              <ExternalLink href="https://github.com/Dakkers/rhymelab">RhymeLab</ExternalLink> – a
+              workbench for annotating the rhyme scheme of songs and poems.
+            </li>
+          </ul>
         </div>
       </section>
     </main>
