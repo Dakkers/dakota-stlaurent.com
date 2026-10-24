@@ -24,6 +24,9 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          <a href="https://notes.dakota-stlaurent.com" className="nav-link">
+            Notes
+          </a>
         </div>
 
         <div className="ml-auto flex items-center gap-1 sm:gap-2">
