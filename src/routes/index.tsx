@@ -15,7 +15,8 @@ function Home() {
             UX/UI Developer | Producer, Composer, Songwriter
           </div>
           <p className="text-center lg:text-left  max-w-3xl text-lg text-[var(--primary-400)]">
-            Howdy! My name's Dakota. Click <Link to="/work">here</Link> to see what I do.
+            Howdy! My name's Dakota. See what I do on my <Link to="/work">Work</Link> page, or meet
+            my miniature pigs on the <Link to="/pigs">Pigs</Link> page.
           </p>
         </div>
 
