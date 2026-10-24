@@ -19,19 +19,7 @@ function About() {
           <hr />
 
           <p>
-            I&lsquo;m currently the lead UX/UI developer at{" "}
-            <ExternalLink href="https://www.guardrail.ai/">Guardrail</ExternalLink>. I've written
-            almost the entire customer-facing web application by myself! I opted to use React with a
-            couple of the Tanstack tools (Router, Form, Query). My primary focus has been crafting a
-            codebase that results in a good developer experience while also making it easy to ship
-            stuff fast. I also did API development related to the frontend work I was doing.
-          </p>
-
-          <p>
-            My time at <ExternalLink href="https://www.applyboard.com/">ApplyBoard</ExternalLink>{" "}
-            was almost entirely on the UI Engineering team, where I was responsible for the
-            company's design system. I was responsible for managing much of the frontend CI tooling
-            as well!
+            Want the dev side of things? Head over to my <Link to="/work">Work</Link> page.
           </p>
 
           {/* <hr />
